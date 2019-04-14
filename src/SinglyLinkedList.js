@@ -27,14 +27,44 @@ class SinglyLinkedList {
   }
 
   /**
+   * Empties the list
+   * @retun {SinglyLinkedList}
+   */
+  emptyList() {
+    this.head = this.tail = null;
+    this.length = 0;
+  }
+
+  /**
    * Check if the list is empty
    * @return {Boolean}
    */
   isEmpty() {
-    if (!this.head || this.length === 0) {
-      return true;
+    return !this.head || this.length === 0;
+  }
+
+  /**
+   *
+   * @param {Function} cb - a callback function that returns the node
+   */
+
+  traverse(cb) {
+    // if list is empty
+    if (this.isEmpty()) return null;
+
+    // reference to the head
+    let node = this.head;
+
+    // start looping
+    while (node.next) {
+      // use callback
+      // if is passed as argument
+      if (typeof cb === 'function') {
+        cb(node);
+      }
+      // move on to the list
+      node = node.next;
     }
-    return false;
   }
 
   /**
@@ -44,19 +74,15 @@ class SinglyLinkedList {
    * @return {SinglyLinkedList}
    */
   push(val) {
-    // If val is empty return
-    if (!val || typeof val === 'undefined') return this;
     // create a new Node with the passed value
     const node = new Node(val);
     // If the list is empty then
     // then the new node is both the head and the tail
-    // We could also use length, as for arrays, to check
     if (this.isEmpty()) {
       // set both head and tail to be the node
       this.head = this.tail = node;
     } else {
-      // Set the next pointer of the actual tail to be
-      // The new Node
+      // Set the next pointer of the actual tail to be the new node
       // Then set the new Node to be the tail
       this.tail.next = node;
       this.tail = node;
@@ -71,7 +97,7 @@ class SinglyLinkedList {
    * Adds a new Node at the beginning of the list
    * The new node is now the head
    * @param val - the Node value
-   * @return
+   * @return {SinglyeLinkedList}
    */
 
   unshift(val) {
