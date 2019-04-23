@@ -396,15 +396,17 @@ class SinglyLinkedList {
     // For the tail because it will be our
     // New head
     let node = this.head;
+    this.head = this.tail;
     this.tail = node;
     // We need to variable to
     // keep reference to previous and next Node
-    let prev, next;
+    let prev = null;
+    let next;
 
     // Loop through the list
     // We could also use the run method
     while (node) {
-      // we save the next vale @example 2
+      // we save the next value @example 2
       next = node.next;
 
       // set the next node the be the previous
@@ -424,6 +426,34 @@ class SinglyLinkedList {
     // So we just set it to be the head
     // @example (tail)1 <- 2 <- 3 <- 4 <- 5(head)
     this.head = prev;
+    return this;
+  }
+
+  reverseWithRecursion() {
+    /**
+     *
+     * @param {Node} head
+     * @return {Node} The reversed head of he list
+     */
+
+    function reverse(head) {
+      if (!head || !head.next) {
+        return head;
+      }
+
+      let tmp = reverse(head.next);
+      head.next.next = head;
+      head.next = null;
+      return tmp;
+    }
+    // Start recursions
+    reverse(this.head);
+
+    // Swap head and tail
+    let node = this.tail;
+    this.tail = this.head;
+    this.head = node;
+    // Return list
     return this;
   }
 }

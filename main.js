@@ -1,4 +1,5 @@
 import SinglyLinkedList from './src/SinglyLinkedList.js';
+
 const List = new SinglyLinkedList();
 List.push(1);
 List.push(2);
