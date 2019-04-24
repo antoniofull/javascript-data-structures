@@ -255,7 +255,7 @@ class SinglyLinkedList {
    * @param val - the value to update
    * */
 
-  set(index, val) {
+  update(index, val) {
     // we take advantage of our findAt method
     let node = this.findAt(index);
     // If node is found
